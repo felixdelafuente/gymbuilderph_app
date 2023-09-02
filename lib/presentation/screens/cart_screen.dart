@@ -256,7 +256,7 @@ class _CartScreen extends State<CartScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Perform some action when the button is pressed
+                    context.goNamed("order");
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.black87),

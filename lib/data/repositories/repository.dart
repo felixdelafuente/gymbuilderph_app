@@ -1,5 +1,6 @@
 import 'package:gym_builder_app/data/models/address_model.dart';
 import 'package:gym_builder_app/data/models/cart_model.dart';
+import 'package:gym_builder_app/data/models/order_model.dart';
 import 'package:gym_builder_app/data/models/products_model.dart';
 import 'package:gym_builder_app/data/models/user_model.dart';
 import 'package:gym_builder_app/data/provider/api_provider.dart';
@@ -116,6 +117,17 @@ class Repository {
     );
   }
 
+  // ORDER
+  Future<List<OrderModel>> getOrder() async {
+    try {
+      final List cartResult = await _provider.orderRequest();
+
+      return cartResult.map((e) => OrderModel.fromJson(e)).toList();
+    } catch (e) {
+      throw Exception("Failed to load order, ${e.toString()}");
+    }
+  }
+
   Future<dynamic> addOrder(
     int userId,
     int addressId,
@@ -136,9 +148,9 @@ class Repository {
     );
   }
 
-  // Future<ProductsModel> deleteProducts(int? memberId) {
-  //   return _provider.productsDeleteRequest(memberId!);
-  // }
+  Future deleteOrder(int? orderId) {
+    return _provider.orderDeleteRequest(orderId!);
+  }
 
   // Future<dynamic> updateProducts(
   //   int memberId,

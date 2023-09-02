@@ -1,4 +1,4 @@
-part of 'checkout_bloc.dart';
+part of 'order_bloc.dart';
 
 @immutable
 abstract class OrderEvent extends Equatable {
@@ -33,10 +33,10 @@ class AddOrderEvent extends OrderEvent {
   });
 }
 
-// class DeleteOrderEvent extends OrderEvent {
-//   final int cartId;
+class DeleteOrderEvent extends OrderEvent {
+  final int orderId;
 
-//   const DeleteOrderEvent({
-//     required this.cartId,
-//   });
-// }
+  const DeleteOrderEvent({
+    required this.orderId,
+  });
+}

@@ -1,4 +1,4 @@
-part of 'checkout_bloc.dart';
+part of 'order_bloc.dart';
 
 @immutable
 sealed class OrderState extends Equatable {}

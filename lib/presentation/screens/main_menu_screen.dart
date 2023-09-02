@@ -127,14 +127,14 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      context.goNamed("information");
+                      context.goNamed("order");
                     },
                     child: const Card(
                         child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.info_outline_rounded,
+                          Icons.delivery_dining_outlined,
                           size: 64,
                           color: Colors.indigo,
                         ),
@@ -142,7 +142,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                           height: 8,
                         ),
                         Text(
-                          "Information",
+                          "Order",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),

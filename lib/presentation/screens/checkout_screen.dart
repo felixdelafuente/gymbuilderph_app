@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gym_builder_app/bloc/address/address_bloc.dart';
 import 'package:gym_builder_app/bloc/cart/cart_bloc.dart';
-import 'package:gym_builder_app/bloc/checkout/checkout_bloc.dart';
+import 'package:gym_builder_app/bloc/order/order_bloc.dart';
 import 'package:gym_builder_app/bloc/products/products_bloc.dart';
 import 'package:gym_builder_app/data/models/address_model.dart';
 import 'package:gym_builder_app/data/models/cart_model.dart';

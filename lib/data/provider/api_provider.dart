@@ -8,7 +8,7 @@ class ApiProvider {
   final Dio _dio = Dio(BaseOptions(
     // baseUrl: 'http://localhost/gymbuilderph_api/',
     baseUrl:
-        'http://192.168.1.3/gymbuilderph_api/', // Modify IP address base on location
+        'http://192.168.1.10/gymbuilderph_api/', // Modify IP address base on location
     connectTimeout: const Duration(seconds: 60),
     receiveTimeout: const Duration(seconds: 30),
   ));
@@ -301,33 +301,33 @@ class ApiProvider {
   }
 
   // ORDER
-  // Future<List<dynamic>> orderRequest() async {
-  //   List<dynamic> orderResult;
-  //   print(loginState.user!.userId);
-  //   try {
-  //     Response response =
-  //         await _dio.get('get_cart.php?user_id=${loginState.user!.userId}');
-  //     orderResult = response.data;
-  //     print("cartResult: $orderResult");
-  //     return orderResult;
-  //   } on DioException catch (e) {
-  //     print("cartRequest not working 1");
-  //     if (e.response != null) {
-  //       print("cartRequest not working 2");
-  //       debugPrint('Dio error!');
-  //       debugPrint('STATUS: ${e.response?.statusCode}');
-  //       debugPrint('DATA: ${e.response?.data['message']}');
-  //       debugPrint('HEADERS: ${e.response?.headers}');
-  //     } else {
-  //       print("cartRequest not working 3");
-  //       debugPrint('Error sending request!');
-  //       debugPrint(e.message);
-  //     }
-  //     rethrow;
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
+  Future<List<dynamic>> orderRequest() async {
+    List<dynamic> orderResult;
+    print(loginState.user!.userId);
+    try {
+      Response response =
+          await _dio.get('get_order.php?user_id=${loginState.user!.userId}');
+      orderResult = response.data;
+      print("orderResult: $orderResult");
+      return orderResult;
+    } on DioException catch (e) {
+      print("orderResult not working 1");
+      if (e.response != null) {
+        print("orderResult not working 2");
+        debugPrint('Dio error!');
+        debugPrint('STATUS: ${e.response?.statusCode}');
+        debugPrint('DATA: ${e.response?.data['message']}');
+        debugPrint('HEADERS: ${e.response?.headers}');
+      } else {
+        print("orderResult not working 3");
+        debugPrint('Error sending request!');
+        debugPrint(e.message);
+      }
+      rethrow;
+    } catch (e) {
+      rethrow;
+    }
+  }
   
   Future<dynamic> orderAddRequest(
     int userId,
@@ -380,5 +380,27 @@ class ApiProvider {
       }
     }
     return orderAddRequest;
+  }
+
+  Future<dynamic> orderDeleteRequest(int orderId) async {
+    dynamic orderDeleteRequest;
+    try {
+      Response response = await _dio.delete('delete_order.php?order_id=$orderId');
+      orderDeleteRequest = response.data;
+      print("try delete works");
+    } on DioException catch (e) {
+      if (e.response != null) {
+        orderDeleteRequest = e.response?.data['message'];
+        debugPrint('Dio error!');
+        debugPrint('STATUS: ${e.response?.statusCode}');
+        debugPrint('DATA: ${e.response?.data['message']}');
+        debugPrint('HEADERS: ${e.response?.headers}');
+      } else {
+        orderDeleteRequest = "Something went wrong";
+        debugPrint('Error sending request!');
+        debugPrint(e.message);
+      }
+    }
+    return cartDeleteRequest!;
   }
 }

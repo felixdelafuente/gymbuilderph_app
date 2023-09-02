@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:gym_builder_app/bloc/cart/cart_bloc.dart';
 import 'package:gym_builder_app/bloc/login/login_state.dart';
+import 'package:gym_builder_app/bloc/order/order_bloc.dart';
 import 'package:gym_builder_app/presentation/navigation/router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => CartBloc()..add(LoadCartEvent()),
+        ),
+        BlocProvider(
+          create: (context) => OrderBloc()..add(LoadOrderEvent()),
         )
       ],
       child: Builder(builder: (context) {
