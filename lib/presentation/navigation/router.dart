@@ -7,7 +7,8 @@ import 'package:gym_builder_app/bloc/login/login_bloc.dart';
 import 'package:gym_builder_app/bloc/login/login_state.dart';
 import 'package:gym_builder_app/bloc/order/order_bloc.dart';
 import 'package:gym_builder_app/bloc/products/products_bloc.dart';
-import 'package:gym_builder_app/presentation/screens/about_screen.dart';
+import 'package:gym_builder_app/bloc/user/user_bloc.dart';
+import 'package:gym_builder_app/presentation/screens/information_screen.dart';
 import 'package:gym_builder_app/presentation/screens/cart_screen.dart';
 import 'package:gym_builder_app/presentation/screens/checkout_screen.dart';
 import 'package:gym_builder_app/presentation/screens/order_screen.dart';
@@ -138,19 +139,21 @@ class MyRouter {
           path: '/about',
           pageBuilder: ((context, state) {
             return MaterialPage(
-                child: AboutScreen(
+                child: InformationScreen(
               title: title,
             ));
           })),
       GoRoute(
-          name: 'profile',
-          path: '/profile',
-          pageBuilder: ((context, state) {
-            return MaterialPage(
-                child: ProfileScreen(
-              title: title,
-            ));
-          })),
+        name: 'profile',
+        path: '/profile',
+        pageBuilder: (context, state) => MaterialPage(
+            child: BlocProvider(
+          create: (context) => UserBloc()..add(LoadUserEvent()),
+          child: const ProfileScreen(
+            title: "Profile",
+          ),
+        )),
+      ),
     ],
     // redirect: (context, state) {
     //   bool isAuthenticating = [

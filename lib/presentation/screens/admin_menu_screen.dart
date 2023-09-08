@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gym_builder_app/presentation/widgets/drawer.dart';
 
-class MainMenuScreen extends StatefulWidget {
-  const MainMenuScreen({super.key, required this.title});
+class AdminMenuScreen extends StatefulWidget {
+  const AdminMenuScreen({super.key, required this.title});
   final String title;
 
   @override
-  State<MainMenuScreen> createState() => _MainMenuScreenState();
+  State<AdminMenuScreen> createState() => _AdminMenuScreenState();
 }
 
-class _MainMenuScreenState extends State<MainMenuScreen> {
+class _AdminMenuScreenState extends State<AdminMenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,81 +50,81 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                       ],
                     )),
                   ),
-                  InkWell(
-                    onTap: () {
-                      context.goNamed("cart");
-                    },
-                    child: const Card(
-                        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.shopping_cart_outlined,
-                          size: 64,
-                          color: Colors.green,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          "Cart",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    )),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      context.goNamed("checkout");
-                    },
-                    child: const Card(
-                        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.account_balance_wallet_outlined,
-                          size: 64,
-                          color: Colors.blue,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          "Checkout",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    )),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      context.goNamed("profile");
-                    },
-                    child: const Card(
-                        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.person_outline_rounded,
-                          size: 64,
-                          color: Colors.teal,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          "Profile",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    )),
-                  ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     context.goNamed("cart");
+                  //   },
+                  //   child: const Card(
+                  //       child: Column(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       Icon(
+                  //         Icons.shopping_cart_outlined,
+                  //         size: 64,
+                  //         color: Colors.green,
+                  //       ),
+                  //       SizedBox(
+                  //         height: 8,
+                  //       ),
+                  //       Text(
+                  //         "Cart",
+                  //         textAlign: TextAlign.center,
+                  //         style: TextStyle(
+                  //             fontSize: 24, fontWeight: FontWeight.bold),
+                  //       )
+                  //     ],
+                  //   )),
+                  // ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     context.goNamed("checkout");
+                  //   },
+                  //   child: const Card(
+                  //       child: Column(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       Icon(
+                  //         Icons.account_balance_wallet_outlined,
+                  //         size: 64,
+                  //         color: Colors.blue,
+                  //       ),
+                  //       SizedBox(
+                  //         height: 8,
+                  //       ),
+                  //       Text(
+                  //         "Checkout",
+                  //         textAlign: TextAlign.center,
+                  //         style: TextStyle(
+                  //             fontSize: 24, fontWeight: FontWeight.bold),
+                  //       )
+                  //     ],
+                  //   )),
+                  // ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     context.goNamed("profile");
+                  //   },
+                  //   child: const Card(
+                  //       child: Column(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       Icon(
+                  //         Icons.person_outline_rounded,
+                  //         size: 64,
+                  //         color: Colors.teal,
+                  //       ),
+                  //       SizedBox(
+                  //         height: 8,
+                  //       ),
+                  //       Text(
+                  //         "Profile",
+                  //         textAlign: TextAlign.center,
+                  //         style: TextStyle(
+                  //             fontSize: 24, fontWeight: FontWeight.bold),
+                  //       )
+                  //     ],
+                  //   )),
+                  // ),
                   InkWell(
                     onTap: () {
                       context.goNamed("order");

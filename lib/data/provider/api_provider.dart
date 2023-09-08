@@ -328,7 +328,7 @@ class ApiProvider {
       rethrow;
     }
   }
-  
+
   Future<dynamic> orderAddRequest(
     int userId,
     int addressId,
@@ -385,7 +385,8 @@ class ApiProvider {
   Future<dynamic> orderDeleteRequest(int orderId) async {
     dynamic orderDeleteRequest;
     try {
-      Response response = await _dio.delete('delete_order.php?order_id=$orderId');
+      Response response =
+          await _dio.delete('delete_order.php?order_id=$orderId');
       orderDeleteRequest = response.data;
       print("try delete works");
     } on DioException catch (e) {
@@ -401,6 +402,88 @@ class ApiProvider {
         debugPrint(e.message);
       }
     }
-    return cartDeleteRequest!;
+    return cartDeleteRequest;
+  }
+
+  // USER
+  Future<List<dynamic>> userRequest() async {
+    List<dynamic> userResult;
+    try {
+      Response response =
+          await _dio.get('user.php?user_id=${loginState.user!.userId}');
+      userResult = response.data;
+      print("userRequest: $userResult");
+      return userResult;
+    } on DioException catch (e) {
+      print("userRequest not working 1");
+      if (e.response != null) {
+        print("userRequest not working 2");
+        debugPrint('Dio error!');
+        debugPrint('STATUS: ${e.response?.statusCode}');
+        debugPrint('DATA: ${e.response?.data['message']}');
+        debugPrint('HEADERS: ${e.response?.headers}');
+      } else {
+        print("userRequest not working 3");
+        debugPrint('Error sending request!');
+        debugPrint(e.message);
+      }
+      rethrow;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> userUpdateRequest(
+    int userId,
+    String firstName,
+    String lastName,
+    String email,
+  ) async {
+    dynamic userUpdateRequest;
+    try {
+      Response response = await _dio.put('user.php?user_id=$userId', data: {
+        "user_id": userId,
+        "first_name": firstName,
+        "last_name": lastName,
+        "email": email,
+      });
+      userUpdateRequest = response.data;
+      print("try update works");
+    } on DioException catch (e) {
+      if (e.response != null) {
+        userUpdateRequest = e.response?.data['message'];
+        debugPrint('Dio error!');
+        debugPrint('STATUS: ${e.response?.statusCode}');
+        debugPrint('DATA: ${e.response?.data['message']}');
+        debugPrint('HEADERS: ${e.response?.headers}');
+      } else {
+        userUpdateRequest = "Something went wrong";
+        debugPrint('Error sending request!');
+        debugPrint(e.message);
+      }
+    }
+    return userUpdateRequest!;
+  }
+
+  Future<dynamic> userDeleteRequest(int userId) async {
+    dynamic userDeleteRequest;
+    try {
+      Response response = await _dio.delete('user.php?cart_id=$userId');
+      userDeleteRequest = response.data;
+      print("try delete works");
+    } on DioException catch (e) {
+      if (e.response != null) {
+        userDeleteRequest = e.response?.data['message'];
+        debugPrint('Dio error!');
+        debugPrint('STATUS: ${e.response?.statusCode}');
+        debugPrint('DATA: ${e.response?.data['message']}');
+        debugPrint('HEADERS: ${e.response?.headers}');
+      } else {
+        userDeleteRequest = "Something went wrong";
+        debugPrint('Error sending request!');
+        debugPrint(e.message);
+      }
+    }
+    return cartDeleteRequest;
   }
 }

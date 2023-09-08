@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gym_builder_app/presentation/widgets/drawer.dart';
 
-class AboutScreen extends StatefulWidget {
-  const AboutScreen({super.key, required this.title});
+class InformationScreen extends StatefulWidget {
+  const InformationScreen({super.key, required this.title});
   final String title;
 
   @override
-  State<AboutScreen> createState() => _AboutScreenState();
+  State<InformationScreen> createState() => _InformationScreenState();
 }
 
-class _AboutScreenState extends State<AboutScreen> {
+class _InformationScreenState extends State<InformationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        leading: BackButton(
+          onPressed: () => context.pushNamed("menu"),
+        ),
+        title: const Text("Your Order"),
         centerTitle: true,
         backgroundColor: const Color(0xff2b2b2b),
       ),
-      drawer: appDrawer(context),
       body: const Padding(
         padding: EdgeInsets.all(16.0),
         child: SingleChildScrollView(

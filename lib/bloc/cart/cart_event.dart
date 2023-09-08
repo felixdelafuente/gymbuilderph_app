@@ -44,35 +44,3 @@ class DeleteCartEvent extends CartEvent {
     required this.cartId,
   });
 }
-
-// class CartEvent {
-//   // // A named constructor for the CartEvent.add event
-//   // const CartEvent.add(this.product);
-
-//   // // A named constructor for the CartEvent.remove event
-//   // const CartEvent.remove(this.product);
-
-//   // // A named constructor for the CartEvent.clear event
-//   // const CartEvent.clear(this.product);
-
-//   // // A property to store the product information
-//   // final ProductsModel? product;
-// }
-
-// class AddCartEvent extends CartEvent {
-//   final ProductsModel product;
-
-//   AddCartEvent({required this.product});
-// }
-
-// class RemoveCartEvent extends CartEvent {
-//   final ProductsModel product;
-
-//   RemoveCartEvent({required this.product});
-// }
-
-// class ClearCartEvent extends CartEvent {
-//   final ProductsModel product;
-
-//   ClearCartEvent({required this.product});
-// }

@@ -152,6 +152,35 @@ class Repository {
     return _provider.orderDeleteRequest(orderId!);
   }
 
+  // USER
+  Future<List<UserModel>> getUser() async {
+    try {
+      final List userResult = await _provider.userRequest();
+
+      return userResult.map((e) => UserModel.fromJson(e)).toList();
+    } catch (e) {
+      throw Exception("Failed to load user, ${e.toString()}");
+    }
+  }
+
+  Future<dynamic> updateUser(
+    int userId,
+    String firstName,
+    String lastName,
+    String email,
+  ) {
+    return _provider.userUpdateRequest(
+      userId,
+      firstName,
+      lastName,
+      email
+    );
+  }
+
+  Future<dynamic> deleteUser(int userId) {
+    return _provider.cartDeleteRequest(userId);
+  }
+
   // Future<dynamic> updateProducts(
   //   int memberId,
   //   dynamic avatar,
