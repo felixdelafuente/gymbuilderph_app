@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gym_builder_app/presentation/widgets/admin_drawer.dart';
 import 'package:gym_builder_app/presentation/widgets/drawer.dart';
 
 class AdminMenuScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
         centerTitle: true,
         backgroundColor: const Color(0xff2b2b2b),
       ),
-      drawer: appDrawer(context),
+      drawer: adminAppDrawer(context),
       body: Center(
           child: Container(
               decoration: const BoxDecoration(color: Color(0xfff0f0f0)),
@@ -28,6 +29,28 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2, mainAxisSpacing: 8, crossAxisSpacing: 8),
                 children: [
+                  InkWell(
+                    onTap: () {
+                      context.goNamed("dashboard");
+                    },
+                    child: const Card(
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.analytics_outlined,
+                            size: 64, color: Colors.green),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          "Dashboard",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    )),
+                  ),
                   InkWell(
                     onTap: () {
                       context.goNamed("products");
@@ -50,81 +73,6 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                       ],
                     )),
                   ),
-                  // InkWell(
-                  //   onTap: () {
-                  //     context.goNamed("cart");
-                  //   },
-                  //   child: const Card(
-                  //       child: Column(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-                  //       Icon(
-                  //         Icons.shopping_cart_outlined,
-                  //         size: 64,
-                  //         color: Colors.green,
-                  //       ),
-                  //       SizedBox(
-                  //         height: 8,
-                  //       ),
-                  //       Text(
-                  //         "Cart",
-                  //         textAlign: TextAlign.center,
-                  //         style: TextStyle(
-                  //             fontSize: 24, fontWeight: FontWeight.bold),
-                  //       )
-                  //     ],
-                  //   )),
-                  // ),
-                  // InkWell(
-                  //   onTap: () {
-                  //     context.goNamed("checkout");
-                  //   },
-                  //   child: const Card(
-                  //       child: Column(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-                  //       Icon(
-                  //         Icons.account_balance_wallet_outlined,
-                  //         size: 64,
-                  //         color: Colors.blue,
-                  //       ),
-                  //       SizedBox(
-                  //         height: 8,
-                  //       ),
-                  //       Text(
-                  //         "Checkout",
-                  //         textAlign: TextAlign.center,
-                  //         style: TextStyle(
-                  //             fontSize: 24, fontWeight: FontWeight.bold),
-                  //       )
-                  //     ],
-                  //   )),
-                  // ),
-                  // InkWell(
-                  //   onTap: () {
-                  //     context.goNamed("profile");
-                  //   },
-                  //   child: const Card(
-                  //       child: Column(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-                  //       Icon(
-                  //         Icons.person_outline_rounded,
-                  //         size: 64,
-                  //         color: Colors.teal,
-                  //       ),
-                  //       SizedBox(
-                  //         height: 8,
-                  //       ),
-                  //       Text(
-                  //         "Profile",
-                  //         textAlign: TextAlign.center,
-                  //         style: TextStyle(
-                  //             fontSize: 24, fontWeight: FontWeight.bold),
-                  //       )
-                  //     ],
-                  //   )),
-                  // ),
                   InkWell(
                     onTap: () {
                       context.goNamed("order");
@@ -142,7 +90,7 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                           height: 8,
                         ),
                         Text(
-                          "Order",
+                          "Orders",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),
@@ -152,22 +100,22 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      context.goNamed("about");
+                      context.goNamed("user");
                     },
                     child: const Card(
                         child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.question_mark_rounded,
+                          Icons.groups_2_outlined,
                           size: 64,
-                          color: Colors.red,
+                          color: Colors.teal,
                         ),
                         SizedBox(
                           height: 8,
                         ),
                         Text(
-                          "Information",
+                          "Users",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),

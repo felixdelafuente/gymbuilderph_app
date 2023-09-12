@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:restart_app/restart_app.dart';
 
-Widget appDrawer(BuildContext context) {
+Widget adminAppDrawer(BuildContext context) {
   return Drawer(
     child: ListView(
       // Important: Remove any padding from the ListView.
@@ -10,6 +10,16 @@ Widget appDrawer(BuildContext context) {
       children: [
         const SizedBox(
           height: 64,
+        ),
+        ListTile(
+          leading: const Icon(
+            Icons.dashboard_outlined,
+          ),
+          title: const Text('Dashbaord'),
+          onTap: () {
+            context.goNamed("dashboard");
+            Navigator.pop(context);
+          },
         ),
         ListTile(
           leading: const Icon(
@@ -23,21 +33,11 @@ Widget appDrawer(BuildContext context) {
         ),
         ListTile(
           leading: const Icon(
-            Icons.shopping_cart_outlined,
-          ),
-          title: const Text('Cart'),
-          onTap: () {
-            context.goNamed("cart");
-            Navigator.pop(context);
-          },
-        ),
-        ListTile(
-          leading: const Icon(
             Icons.account_balance_wallet_outlined,
           ),
-          title: const Text('Checkout'),
+          title: const Text('Orders'),
           onTap: () {
-            context.goNamed("checkout");
+            context.goNamed("order");
             Navigator.pop(context);
           },
         ),
@@ -45,29 +45,9 @@ Widget appDrawer(BuildContext context) {
           leading: const Icon(
             Icons.person_outline_rounded,
           ),
-          title: const Text('Profile'),
+          title: const Text('Users'),
           onTap: () {
-            context.goNamed("profile");
-            Navigator.pop(context);
-          },
-        ),
-        ListTile(
-          leading: const Icon(
-            Icons.info_outline_rounded,
-          ),
-          title: const Text('Information'),
-          onTap: () {
-            context.goNamed("information");
-            Navigator.pop(context);
-          },
-        ),
-        ListTile(
-          leading: const Icon(
-            Icons.question_mark_outlined,
-          ),
-          title: const Text('About'),
-          onTap: () {
-            context.goNamed("about");
+            context.goNamed("user");
             Navigator.pop(context);
           },
         ),

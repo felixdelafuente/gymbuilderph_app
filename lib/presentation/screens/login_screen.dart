@@ -101,17 +101,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 // A widget for the Log In button
-                ElevatedButton(
-                  onPressed: () {
-                    // Perform the login logic here
-                    // print('Email: ${_emailController.text}');
-                    // print('Password: ${_passwordController.text}');
-                    _loginBloc.add(LoginUserEvent(
-                        email: _emailController.text,
-                        password: _passwordController.text));
-                  },
-                  child: const Text('Log In'),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Perform the login logic here
+                      // print('Email: ${_emailController.text}');
+                      // print('Password: ${_passwordController.text}');
+                      _loginBloc.add(LoginUserEvent(
+                          email: _emailController.text,
+                          password: _passwordController.text));
+                    },
+                    child: const Text('Log In'),
+                  ),
                 ),
+                // SizedBox(
+                //   width: double.infinity,
+                //   child: ElevatedButton(
+                //     onPressed: () {
+                //       // launch("http://gymbuilderph.com/register");
+                //     },
+                //     child: const Text('Register'),
+                //   ),
+                // )
               ],
             ),
           ),

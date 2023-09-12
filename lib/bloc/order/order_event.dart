@@ -8,6 +8,11 @@ abstract class OrderEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class LoadAllOrderEvent extends OrderEvent {
+  @override
+  List<Object> get props => [];
+}
+
 class LoadOrderEvent extends OrderEvent {
   @override
   List<Object> get props => [];

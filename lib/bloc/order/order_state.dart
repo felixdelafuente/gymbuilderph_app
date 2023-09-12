@@ -8,6 +8,15 @@ class OrderLoadingState extends OrderState {
   List<Object?> get props => [];
 }
 
+class AllOrderLoadedState<OrderItemModel> extends OrderState {
+  final OrderItemModel order;
+
+  AllOrderLoadedState(this.order);
+
+  @override
+  List<Object?> get props => [order];
+}
+
 class OrderLoadedState<OrderModel> extends OrderState {
   final OrderModel order;
 

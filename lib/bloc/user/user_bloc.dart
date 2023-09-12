@@ -11,6 +11,20 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     Repository repository = Repository();
     print("outside LoadUserEvent working");
 
+    on<LoadAllUserEvent>((event, emit) async {
+      print("inside LoadUserEvent working");
+      emit(UserLoadingState());
+      try {
+        print("inside try UserLoadingState working");
+        final user = await repository.getAllUser();
+        print("UserBloc UserLoadedState: $user");
+        emit(AllUserLoadedState(user));
+      } catch (e) {
+        print("UserBloc UserErrorState: ${e.toString()}");
+        emit(UserErrorState(e.toString()));
+      }
+    });
+
     on<LoadUserEvent>((event, emit) async {
       print("inside LoadUserEvent working");
       emit(UserLoadingState());

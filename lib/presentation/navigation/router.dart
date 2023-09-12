@@ -8,14 +8,21 @@ import 'package:gym_builder_app/bloc/login/login_state.dart';
 import 'package:gym_builder_app/bloc/order/order_bloc.dart';
 import 'package:gym_builder_app/bloc/products/products_bloc.dart';
 import 'package:gym_builder_app/bloc/user/user_bloc.dart';
+import 'package:gym_builder_app/main.dart';
+import 'package:gym_builder_app/presentation/screens/admin_dashboard_screen%20copy.dart';
+import 'package:gym_builder_app/presentation/screens/admin_menu_screen.dart';
+import 'package:gym_builder_app/presentation/screens/admin_order_screen.dart';
+import 'package:gym_builder_app/presentation/screens/admin_product_screen.dart';
+import 'package:gym_builder_app/presentation/screens/admin_user_screen.dart';
 import 'package:gym_builder_app/presentation/screens/information_screen.dart';
 import 'package:gym_builder_app/presentation/screens/cart_screen.dart';
 import 'package:gym_builder_app/presentation/screens/checkout_screen.dart';
+import 'package:gym_builder_app/presentation/screens/not_found_screen.dart';
 import 'package:gym_builder_app/presentation/screens/order_screen.dart';
 import 'package:gym_builder_app/presentation/screens/login_screen.dart';
 import 'package:gym_builder_app/presentation/screens/main_menu_screen.dart';
 import 'package:gym_builder_app/presentation/screens/products_screen.dart';
-import 'package:gym_builder_app/presentation/screens/profile_screen.dart';
+import 'package:gym_builder_app/presentation/screens/user_screen.dart';
 
 const String loggedInKey = 'LoggedIn';
 
@@ -39,13 +46,21 @@ class MyRouter {
         )),
       ),
       GoRoute(
-        name: 'menu',
-        path: '/menu',
-        pageBuilder: (context, state) => MaterialPage(
-            child: MainMenuScreen(
-          title: title,
-        )),
-      ),
+          name: 'menu',
+          path: '/menu',
+          pageBuilder: (context, state) {
+            if (loginState.user!.admin!.isOdd) {
+              return MaterialPage(
+                  child: AdminMenuScreen(
+                title: title,
+              ));
+            } else {
+              return MaterialPage(
+                  child: MainMenuScreen(
+                title: title,
+              ));
+            }
+          }),
       GoRoute(
           name: 'products',
           path: '/products',
@@ -66,9 +81,11 @@ class MyRouter {
                   create: (context) => CartBloc()..add(LoadCartEvent()),
                 ),
               ],
-              child: ProductsScreen(
-                title: title,
-              ),
+              child: loginState.user!.admin!.isOdd
+                  ? const AdminProductsScreen()
+                  : ProductsScreen(
+                      title: title,
+                    ),
             ));
           })),
       GoRoute(
@@ -129,9 +146,11 @@ class MyRouter {
                   create: (context) => OrderBloc()..add(LoadOrderEvent()),
                 )
               ],
-              child: const OrderScreen(
-                title: "Order Status",
-              ),
+              child: loginState.user!.admin!.isOdd
+                  ? const AdminOrderScreen()
+                  : const OrderScreen(
+                      title: "Order Status",
+                    ),
             ));
           })),
       GoRoute(
@@ -144,16 +163,43 @@ class MyRouter {
             ));
           })),
       GoRoute(
-        name: 'profile',
-        path: '/profile',
-        pageBuilder: (context, state) => MaterialPage(
-            child: BlocProvider(
-          create: (context) => UserBloc()..add(LoadUserEvent()),
-          child: const ProfileScreen(
-            title: "Profile",
-          ),
-        )),
-      ),
+          name: 'user',
+          path: '/user',
+          pageBuilder: (context, state) {
+            if (loginState.user!.admin!.isOdd) {
+              return MaterialPage(
+                  child: BlocProvider(
+                      create: (context) => UserBloc()..add(LoadAllUserEvent()),
+                      child: const AdminUserScreen()));
+            } else {
+              return MaterialPage(
+                  child: BlocProvider(
+                create: (context) => UserBloc()..add(LoadUserEvent()),
+                child: const ProfileScreen(
+                  title: "Profile",
+                ),
+              ));
+            }
+          }),
+      GoRoute(
+          name: 'dashboard',
+          path: '/dashbaord',
+          pageBuilder: ((context, state) {
+            return MaterialPage(
+                child: MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => OrderBloc()..add(LoadAllOrderEvent()),
+                ),
+                BlocProvider(
+                  create: (context) => ProductsBloc()..add(LoadProductsEvent()),
+                ),
+              ],
+              child: loginState.user!.admin!.isOdd
+                  ? const AdminDashboardScreen()
+                  : const NotFoundScreen(),
+            ));
+          })),
     ],
     // redirect: (context, state) {
     //   bool isAuthenticating = [

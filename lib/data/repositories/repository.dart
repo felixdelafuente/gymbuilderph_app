@@ -1,5 +1,6 @@
 import 'package:gym_builder_app/data/models/address_model.dart';
 import 'package:gym_builder_app/data/models/cart_model.dart';
+import 'package:gym_builder_app/data/models/order_item_model.dart';
 import 'package:gym_builder_app/data/models/order_model.dart';
 import 'package:gym_builder_app/data/models/products_model.dart';
 import 'package:gym_builder_app/data/models/user_model.dart';
@@ -118,6 +119,16 @@ class Repository {
   }
 
   // ORDER
+  Future<List<OrderItemModel>> getAllOrder() async {
+    try {
+      final List allOrderResult = await _provider.allOrderRequest();
+
+      return allOrderResult.map((e) => OrderItemModel.fromJson(e)).toList();
+    } catch (e) {
+      throw Exception("Failed to load order, ${e.toString()}");
+    }
+  }
+
   Future<List<OrderModel>> getOrder() async {
     try {
       final List cartResult = await _provider.orderRequest();
@@ -153,6 +164,16 @@ class Repository {
   }
 
   // USER
+  Future<List<UserModel>> getAllUser() async {
+    try {
+      final List userResult = await _provider.allUserRequest();
+
+      return userResult.map((e) => UserModel.fromJson(e)).toList();
+    } catch (e) {
+      throw Exception("Failed to load user, ${e.toString()}");
+    }
+  }
+
   Future<List<UserModel>> getUser() async {
     try {
       final List userResult = await _provider.userRequest();

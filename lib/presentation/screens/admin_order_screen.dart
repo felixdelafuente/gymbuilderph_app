@@ -83,7 +83,7 @@ class _AdminOrderScreenState extends State<AdminOrderScreen> {
         return Scaffold(
           appBar: AppBar(
             leading: BackButton(
-              onPressed: () => context.goNamed('admin-menu'),
+              onPressed: () => context.goNamed('menu'),
             ),
             title: const Text("Order"),
             centerTitle: true,

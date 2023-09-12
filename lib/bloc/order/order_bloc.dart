@@ -12,6 +12,20 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     Repository repository = Repository();
     print("outside LoadOrderEvent working");
 
+    on<LoadAllOrderEvent>((event, emit) async {
+      print("inside LoadOrderEvent working");
+      emit(OrderLoadingState());
+      try {
+        print("inside try OrderLoadingState working");
+        final cart = await repository.getAllOrder();
+        print("OrderBloc OrderLoadedState: $cart");
+        emit(AllOrderLoadedState(cart));
+      } catch (e) {
+        print("OrderBloc OrderErrorState: ${e.toString()}");
+        emit(OrderErrorState(e.toString()));
+      }
+    });
+
     on<LoadOrderEvent>((event, emit) async {
       print("inside LoadOrderEvent working");
       emit(OrderLoadingState());

@@ -8,7 +8,7 @@ class ApiProvider {
   final Dio _dio = Dio(BaseOptions(
     // baseUrl: 'http://localhost/gymbuilderph_api/',
     baseUrl:
-        'http://192.168.1.10/gymbuilderph_api/', // Modify IP address base on location
+        'http://192.168.1.5/gymbuilderph_api/', // Modify IP address base on location
     connectTimeout: const Duration(seconds: 60),
     receiveTimeout: const Duration(seconds: 30),
   ));
@@ -301,6 +301,33 @@ class ApiProvider {
   }
 
   // ORDER
+  Future<List<dynamic>> allOrderRequest() async {
+    List<dynamic> orderResult;
+    try {
+      Response response =
+          await _dio.get('get_orders.php');
+      orderResult = response.data;
+      print("orderResult: $orderResult");
+      return orderResult;
+    } on DioException catch (e) {
+      print("orderResult not working 1");
+      if (e.response != null) {
+        print("orderResult not working 2");
+        debugPrint('Dio error!');
+        debugPrint('STATUS: ${e.response?.statusCode}');
+        debugPrint('DATA: ${e.response?.data['message']}');
+        debugPrint('HEADERS: ${e.response?.headers}');
+      } else {
+        print("orderResult not working 3");
+        debugPrint('Error sending request!');
+        debugPrint(e.message);
+      }
+      rethrow;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<List<dynamic>> orderRequest() async {
     List<dynamic> orderResult;
     print(loginState.user!.userId);
@@ -406,6 +433,33 @@ class ApiProvider {
   }
 
   // USER
+  Future<List<dynamic>> allUserRequest() async {
+    List<dynamic> userResult;
+    try {
+      Response response =
+          await _dio.get('user.php');
+      userResult = response.data;
+      print("userRequest: $userResult");
+      return userResult;
+    } on DioException catch (e) {
+      print("userRequest not working 1");
+      if (e.response != null) {
+        print("userRequest not working 2");
+        debugPrint('Dio error!');
+        debugPrint('STATUS: ${e.response?.statusCode}');
+        debugPrint('DATA: ${e.response?.data['message']}');
+        debugPrint('HEADERS: ${e.response?.headers}');
+      } else {
+        print("userRequest not working 3");
+        debugPrint('Error sending request!');
+        debugPrint(e.message);
+      }
+      rethrow;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<List<dynamic>> userRequest() async {
     List<dynamic> userResult;
     try {

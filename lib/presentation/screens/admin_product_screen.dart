@@ -87,7 +87,7 @@ class _AdminProductsScreenState extends State<AdminProductsScreen> {
         return Scaffold(
           appBar: AppBar(
             leading: BackButton(
-              onPressed: () => context.goNamed('admin-menu'),
+              onPressed: () => context.goNamed('menu'),
             ),
             title: const Text("Products"),
             centerTitle: true,

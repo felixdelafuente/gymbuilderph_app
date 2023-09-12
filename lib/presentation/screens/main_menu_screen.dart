@@ -102,7 +102,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      context.goNamed("profile");
+                      context.goNamed("user");
                     },
                     child: const Card(
                         child: Column(
