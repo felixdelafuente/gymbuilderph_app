@@ -1,10 +1,10 @@
 import 'package:gym_builder_app/data/models/products_model.dart';
 
 class CartModel {
-  int? cartId;
-  int? userId;
-  int? productId;
-  int? quantity;
+  String? cartId;
+  String? userId;
+  String? productId;
+  String? quantity;
   String? dateAdded;
 
   ProductsModel? products;

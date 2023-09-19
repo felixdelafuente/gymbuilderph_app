@@ -47,7 +47,7 @@ class LoginState extends ChangeNotifier {
         .where(
           (element) =>
               element['email'].toString().toLowerCase() ==
-              creds['email']!.toLowerCase(),
+              creds['email']?.toLowerCase(),
         )
         .isNotEmpty;
     if (!isRemembered) {

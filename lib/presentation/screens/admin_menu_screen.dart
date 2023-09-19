@@ -98,31 +98,31 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                       ],
                     )),
                   ),
-                  InkWell(
-                    onTap: () {
-                      context.goNamed("user");
-                    },
-                    child: const Card(
-                        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.groups_2_outlined,
-                          size: 64,
-                          color: Colors.teal,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          "Users",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    )),
-                  ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     context.goNamed("users");
+                  //   },
+                  //   child: const Card(
+                  //       child: Column(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       Icon(
+                  //         Icons.groups_2_outlined,
+                  //         size: 64,
+                  //         color: Colors.teal,
+                  //       ),
+                  //       SizedBox(
+                  //         height: 8,
+                  //       ),
+                  //       Text(
+                  //         "Users",
+                  //         textAlign: TextAlign.center,
+                  //         style: TextStyle(
+                  //             fontSize: 24, fontWeight: FontWeight.bold),
+                  //       )
+                  //     ],
+                  //   )),
+                  // ),
                 ],
               ))),
     );

@@ -5,7 +5,11 @@ import 'package:gym_builder_app/bloc/data_state.dart';
 import 'package:gym_builder_app/bloc/login/login_bloc.dart';
 import 'package:gym_builder_app/bloc/login/login_event.dart';
 import 'package:gym_builder_app/bloc/login/login_state.dart';
+import 'package:gym_builder_app/main.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../main.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -54,11 +58,13 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // A widget for the dumbbell icon of 120x120 pixels
-                const Icon(
-                  Icons.fitness_center,
-                  size: 120,
-                  color: Colors.blue,
+                Container(
+                  width: 120,
+                  height: 120,
+                  child: Image.asset('images/logo.png'),
+                ),
+                SizedBox(
+                  height: 16,
                 ),
                 // A widget for the email text field that has a placeholder of Email
                 Padding(
@@ -100,30 +106,63 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                // A widget for the Log In button
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Perform the login logic here
-                      // print('Email: ${_emailController.text}');
-                      // print('Password: ${_passwordController.text}');
-                      _loginBloc.add(LoginUserEvent(
-                          email: _emailController.text,
-                          password: _passwordController.text));
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 4, 16),
+                  child: GestureDetector(
+                    onTap: () {
+                      launchUrl(
+                          Uri.parse("http://gymbuilderph.com/forgot-password"));
                     },
-                    child: const Text('Log In'),
+                    child: Container(
+                      alignment: Alignment
+                          .centerLeft, // align the container on the left
+                      child: const Text(
+                        'Forgot Password?', // the text to display
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey), // align the text on the left
+                      ),
+                    ),
                   ),
                 ),
-                // SizedBox(
-                //   width: double.infinity,
-                //   child: ElevatedButton(
-                //     onPressed: () {
-                //       // launch("http://gymbuilderph.com/register");
-                //     },
-                //     child: const Text('Register'),
-                //   ),
-                // )
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Perform the login logic here
+                        _loginBloc.add(LoginUserEvent(
+                            email: _emailController.text,
+                            password: _passwordController.text));
+                      },
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.black),
+                      ),
+                      child: const Text('Log In'),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        launchUrl(
+                            Uri.parse("http://gymbuilderph.com/register"));
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.grey),
+                      ),
+                      child: const Text('Register'),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

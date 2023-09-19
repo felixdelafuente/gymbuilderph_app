@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:gym_builder_app/data/models/products_model.dart';
@@ -6,45 +8,45 @@ import 'package:gym_builder_app/main.dart';
 
 class ApiProvider {
   final Dio _dio = Dio(BaseOptions(
-    // baseUrl: 'http://localhost/gymbuilderph_api/',
     baseUrl:
-        'http://192.168.1.5/gymbuilderph_api/', // Modify IP address base on location
+        // 'http://192.168.1.10/gymbuilderph_api/', // Modify IP address base on location when testing
+        'https://api.gymbuilderph.com/',
     connectTimeout: const Duration(seconds: 60),
     receiveTimeout: const Duration(seconds: 30),
   ));
 
   // AUTHENTICATION
   Future<UserModel> loginRequest(String email, String password) async {
-    UserModel? loginRequest;
+    UserModel? loginResponse;
     try {
+      print("before response");
       Response response = await _dio.post(
         'login.php',
         data: {
           'email': email,
           'password': password,
         },
+        // add this line to set the content-type header
+        options: Options(headers: {'content-type': 'application/json'}),
       );
-      debugPrint("response data${response.data.toString()}");
+      print("response data${response.data.toString()}");
+      Map<String, dynamic> responseData = response.data;
       loginState.login(response.data);
-      loginRequest = UserModel();
-      debugPrint("loginrequest ${loginRequest.toString()}");
-
-      // Save User ID upon Login
-      // Storage localStorage = window.localStorage;
-      // localStorage["cebuanaUserId"] = response.data['result']['id'].toString();
+      UserModel userData = UserModel.fromJson(responseData);
+      loginResponse = userData;
+      print("loginrequest admin? ${loginResponse.admin.toString()}");
     } on DioException catch (e) {
       if (e.response != null) {
-        // ErrorResponse(message: e.response?.data['message']);
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print('Error sending request!');
+        print(e.message);
       }
     }
-    return loginRequest!;
+    return loginResponse!;
   }
 
   // PRODUCTS
@@ -83,10 +85,10 @@ class ApiProvider {
   // CART
   Future<List<dynamic>> cartRequest() async {
     List<dynamic> cartResult;
-    print(loginState.user!.userId);
+    print(loginState.user?.userId);
     try {
       Response response =
-          await _dio.get('get_cart.php?user_id=${loginState.user!.userId}');
+          await _dio.get('get_cart.php?user_id=${loginState.user?.userId}');
       cartResult = response.data;
       print("cartResult: $cartResult");
       return cartResult;
@@ -195,11 +197,11 @@ class ApiProvider {
   // ADDRESS
   Future<List<dynamic>> addressRequest() async {
     List<dynamic> addressResult;
-    print("user id: ${loginState.user!.userId}");
+    print("user id: ${loginState.user?.userId}");
     try {
       print("!!!! before response works");
       Response response =
-          await _dio.get('address.php?user_id=${loginState.user!.userId}');
+          await _dio.get('address.php?user_id=${loginState.user?.userId}');
       addressResult = response.data;
       print("addressResult: $addressResult");
       return addressResult;
@@ -304,8 +306,7 @@ class ApiProvider {
   Future<List<dynamic>> allOrderRequest() async {
     List<dynamic> orderResult;
     try {
-      Response response =
-          await _dio.get('get_orders.php');
+      Response response = await _dio.get('get_orders.php');
       orderResult = response.data;
       print("orderResult: $orderResult");
       return orderResult;
@@ -330,10 +331,10 @@ class ApiProvider {
 
   Future<List<dynamic>> orderRequest() async {
     List<dynamic> orderResult;
-    print(loginState.user!.userId);
+    print(loginState.user?.userId);
     try {
       Response response =
-          await _dio.get('get_order.php?user_id=${loginState.user!.userId}');
+          await _dio.get('get_order.php?user_id=${loginState.user?.userId}');
       orderResult = response.data;
       print("orderResult: $orderResult");
       return orderResult;
@@ -436,8 +437,7 @@ class ApiProvider {
   Future<List<dynamic>> allUserRequest() async {
     List<dynamic> userResult;
     try {
-      Response response =
-          await _dio.get('user.php');
+      Response response = await _dio.get('user.php');
       userResult = response.data;
       print("userRequest: $userResult");
       return userResult;
@@ -464,7 +464,7 @@ class ApiProvider {
     List<dynamic> userResult;
     try {
       Response response =
-          await _dio.get('user.php?user_id=${loginState.user!.userId}');
+          await _dio.get('user.php?user_id=${loginState.user?.userId}');
       userResult = response.data;
       print("userRequest: $userResult");
       return userResult;

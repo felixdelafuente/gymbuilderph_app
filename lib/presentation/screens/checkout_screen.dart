@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gym_builder_app/bloc/address/address_bloc.dart';
 import 'package:gym_builder_app/bloc/cart/cart_bloc.dart';
@@ -111,19 +112,63 @@ class _CheckoutScreen extends State<CheckoutScreen> {
             // Check if the current cart id is the lowest for the product id
             if (cartId == lowestCartId[productId]) {
               // Set the quantity to the total quantity
-              cart.quantity = totalQuantity[productId];
+              cart.quantity = totalQuantity[productId].toString();
             } else {
               // Set the quantity to zero
-              cart.quantity = 0;
+              cart.quantity = "0";
             }
           }
           print("quantityzzz: ${cartList.map((e) => e.quantity)}");
 
           List<ProductsModel> productsList = productsState.products;
 
+          // // Create a new empty list to store the filtered products
+          // List<ProductsModel> filteredProducts = [];
+
+          // // Loop through each item in the cartList
+          // for (var cartItem in cartList) {
+          //   // Get the product_id and quantity from the cartItem
+          //   String productId = cartItem.productId.toString();
+          //   String quantity = cartItem.quantity.toString();
+
+          //   // Find the product in the productsList that has the same product_id as the cartItem
+          //   var product =
+          //       productsList.firstWhere((p) => p.productId == productId);
+
+          //   // Get the price from the product
+          //   double price = double.parse(product.price.toString());
+
+          //   // Calculate the total price by multiplying the price and quantity
+          //   double totalPrice = price * int.parse(quantity);
+
+          //   // Create a new map with the product_id, quantity, and totalPrice
+          //   Map<ProducesModel> filteredProduct = {
+          //     'product_id': productId,
+          //     'quantity': quantity,
+          //     'price': totalPrice,
+          //   };
+
+          //   // Add the filteredProduct to the filteredProducts list
+          //   filteredProducts.add(filteredProduct);
+          // }
+
+          //////////////////////////////////////////////////////////////////////////////
+
+          // // Create a set of product_ids from the cartList
+          // Set<String?> productIdsInCart =
+          //     cartList.map((cart) => cart.productId.toString()).toSet();
+
+          // // Filter the productsList using the where method
+          // List<ProductsModel> filteredProducts = productsList.where((product) {
+          //   // Return true if the product_id is in the set
+          //   return productIdsInCart.contains(product.productId);
+          // }).toList();
+
+          ////////////////////////////////////////////////////////////////////////////
+          
           // Create a set of product_ids from the cartList
-          Set<int?> productIdsInCart =
-              cartList.map((cart) => cart.productId).toSet();
+          Set<String?> productIdsInCart =
+              cartList.map((cart) => cart.productId.toString()).toSet();
 
           // Filter the productsList using the where method
           List<ProductsModel> filteredProducts = productsList.where((product) {
@@ -131,16 +176,33 @@ class _CheckoutScreen extends State<CheckoutScreen> {
             return productIdsInCart.contains(product.productId);
           }).toList();
 
+          // Loop through each item in the filteredProducts list
+          for (var filteredProduct in filteredProducts) {
+            // Find the cart item in the cartList that has the same product_id as the filteredProduct
+            var cartItem = cartList.firstWhere(
+                (cart) => cart.productId == filteredProduct.productId);
+
+            // Get the quantity from th e cartItem
+            int quantity = int.parse(cartItem.quantity.toString());
+
+            // Assign the quantity to the item property of the filteredProduct
+            filteredProduct.item = quantity.toString();
+          }
+
+          // Print the filteredProducts list to see the result
+          print(filteredProducts);
+
+
           print("filtered products: $filteredProducts");
 
           // Use the fold method to calculate the total price
           double totalPrice = filteredProducts.fold(
             0.0, // Initial value
             (sum, product) =>
-                sum +
-                (double.parse(product.price.toString()) *
-                    double.parse(product.item
-                        .toString())), // Function to apply to each element
+                sum + double.parse(product.price.toString())
+                // (double.parse(product.price.toString()) *
+                //     double.parse(product.item
+                //         .toString())), // Function to apply to each element
           );
 
           return BlocBuilder<AddressBloc, AddressState>(
@@ -416,6 +478,21 @@ class _CheckoutScreen extends State<CheckoutScreen> {
                             status: "0",
                             deliveryStatus: "processing",
                             orderItems: filteredProducts));
+
+                        // Call the showToast method with the message and other parameters
+                        Fluttertoast.showToast(
+                          msg: 'Order has been placed. Check Orders page for more details',
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 2,
+                          backgroundColor: Colors.green,
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
+
+                        Future.delayed(const Duration(seconds: 3), () {
+                          context.goNamed("menu");
+                        });
                       },
                       style: ButtonStyle(
                         backgroundColor:

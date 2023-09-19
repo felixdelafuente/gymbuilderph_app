@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:gym_builder_app/data/models/address_model.dart';
 import 'package:gym_builder_app/data/models/cart_model.dart';
 import 'package:gym_builder_app/data/models/order_item_model.dart';
@@ -190,12 +191,7 @@ class Repository {
     String lastName,
     String email,
   ) {
-    return _provider.userUpdateRequest(
-      userId,
-      firstName,
-      lastName,
-      email
-    );
+    return _provider.userUpdateRequest(userId, firstName, lastName, email);
   }
 
   Future<dynamic> deleteUser(int userId) {

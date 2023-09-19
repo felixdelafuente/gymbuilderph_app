@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gym_builder_app/bloc/login/login_state.dart';
+import 'package:provider/provider.dart';
 import 'package:restart_app/restart_app.dart';
 
 Widget appDrawer(BuildContext context) {
@@ -78,7 +80,10 @@ Widget appDrawer(BuildContext context) {
           title: const Text('Logout'),
           onTap: () {
             // Restart app and go back to login screen
-            Restart.restartApp();
+            final provider = Provider.of<LoginState>(context, listen: false);
+            provider.loggedIn = false;
+            provider.logout();
+            // Restart.restartApp();
             Navigator.pop(context);
           },
         ),

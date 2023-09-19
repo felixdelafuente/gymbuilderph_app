@@ -170,10 +170,10 @@ class _OrderScreen extends State<OrderScreen> {
             // Check if the current order id is the lowest for the product id
             if (orderId == lowestOrderId[productId]) {
               // Set the quantity to the total quantity
-              order.quantity = totalQuantity[productId];
+              order.quantity = totalQuantity[productId].toString();
             } else {
               // Set the quantity to zero
-              order.quantity = 0;
+              order.quantity = "0";
             }
           }
           print("quantityzzz: ${orderList.map((e) => e.quantity)}");
@@ -181,8 +181,8 @@ class _OrderScreen extends State<OrderScreen> {
           List<ProductsModel> productsList = productsState.products;
 
           // Create a set of product_ids from the orderList
-          Set<int?> productIdsInOrder =
-              orderList.map((order) => order.productId).toSet();
+          Set<String?> productIdsInOrder =
+              orderList.map((order) => order.productId.toString()).toSet();
 
           // Filter the productsList using the where method
           List<ProductsModel> filteredProducts = productsList.where((product) {
@@ -273,7 +273,7 @@ class _OrderScreen extends State<OrderScreen> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
                   child: Text(
-                    "Total: $totalPrice",
+                    "Total: ${orderList.first.totalAmount}",
                     style: const TextStyle(fontSize: 20),
                   ),
                 ),

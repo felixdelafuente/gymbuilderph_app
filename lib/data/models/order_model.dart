@@ -1,14 +1,14 @@
 class OrderModel {
-  int? orderItemId;
-  int? orderId;
-  int? productId;
-  int? quantity;
+  String? orderItemId;
+  String? orderId;
+  String? productId;
+  String? quantity;
   String? price;
-  int? userId;
-  int? addressId;
+  String? userId;
+  String? addressId;
   String? orderDate;
   String? totalAmount;
-  int? status;
+  String? status;
   String? deliveryStatus;
 
   OrderModel(

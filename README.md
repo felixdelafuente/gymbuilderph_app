@@ -1,6 +1,6 @@
-# gym_builder_app
+# Gym Builder PH Mobile App
 
-A new Flutter project.
+Android application made with Flutter that 
 
 ## Getting Started
 

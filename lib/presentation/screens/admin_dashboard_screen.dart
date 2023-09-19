@@ -83,7 +83,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
 // Convert the map to a list of OrderItemModel
         List<OrderItemModel> newList = groupedItems.entries
             .map((entry) => OrderItemModel(
-                productId: entry.key, price: entry.value.toString()))
+                productId: entry.key.toString(), price: entry.value.toString()))
             .toList();
 
         // Calculate the total sales by adding all the price values

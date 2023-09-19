@@ -1,8 +1,8 @@
 class OrderItemModel {
-  int? orderItemId;
-  int? orderId;
-  int? productId;
-  int? quantity;
+  String? orderItemId;
+  String? orderId;
+  String? productId;
+  String? quantity;
   String? price;
 
   OrderItemModel(

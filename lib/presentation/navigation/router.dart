@@ -9,7 +9,7 @@ import 'package:gym_builder_app/bloc/order/order_bloc.dart';
 import 'package:gym_builder_app/bloc/products/products_bloc.dart';
 import 'package:gym_builder_app/bloc/user/user_bloc.dart';
 import 'package:gym_builder_app/main.dart';
-import 'package:gym_builder_app/presentation/screens/admin_dashboard_screen%20copy.dart';
+import 'package:gym_builder_app/presentation/screens/admin_dashboard_screen.dart';
 import 'package:gym_builder_app/presentation/screens/admin_menu_screen.dart';
 import 'package:gym_builder_app/presentation/screens/admin_order_screen.dart';
 import 'package:gym_builder_app/presentation/screens/admin_product_screen.dart';
@@ -32,6 +32,9 @@ class MyRouter {
   MyRouter(this.loginInfo);
 
   String title = "Gym Builder PH";
+
+  
+  // int int.parse(loginState.user?.admin.toString() ?? "0") = int.parse(loginState.user?.admin.toString() ?? "0");
   late final goRouter = GoRouter(
     refreshListenable: loginInfo,
     initialLocation: '/',
@@ -49,17 +52,14 @@ class MyRouter {
           name: 'menu',
           path: '/menu',
           pageBuilder: (context, state) {
-            if (loginState.user!.admin!.isOdd) {
-              return MaterialPage(
-                  child: AdminMenuScreen(
-                title: title,
-              ));
-            } else {
-              return MaterialPage(
-                  child: MainMenuScreen(
-                title: title,
-              ));
-            }
+            return MaterialPage(
+                child: int.parse(loginState.user?.admin.toString() ?? "0").isOdd
+                    ? AdminMenuScreen(
+                        title: title,
+                      )
+                    : MainMenuScreen(
+                        title: title,
+                      ));
           }),
       GoRoute(
           name: 'products',
@@ -81,7 +81,7 @@ class MyRouter {
                   create: (context) => CartBloc()..add(LoadCartEvent()),
                 ),
               ],
-              child: loginState.user!.admin!.isOdd
+              child: int.parse(loginState.user?.admin.toString() ?? "0").isOdd
                   ? const AdminProductsScreen()
                   : ProductsScreen(
                       title: title,
@@ -146,7 +146,7 @@ class MyRouter {
                   create: (context) => OrderBloc()..add(LoadOrderEvent()),
                 )
               ],
-              child: loginState.user!.admin!.isOdd
+              child: int.parse(loginState.user?.admin.toString() ?? "0").isOdd
                   ? const AdminOrderScreen()
                   : const OrderScreen(
                       title: "Order Status",
@@ -166,20 +166,22 @@ class MyRouter {
           name: 'user',
           path: '/user',
           pageBuilder: (context, state) {
-            if (loginState.user!.admin!.isOdd) {
-              return MaterialPage(
-                  child: BlocProvider(
-                      create: (context) => UserBloc()..add(LoadAllUserEvent()),
-                      child: const AdminUserScreen()));
-            } else {
-              return MaterialPage(
-                  child: BlocProvider(
-                create: (context) => UserBloc()..add(LoadUserEvent()),
-                child: const ProfileScreen(
-                  title: "Profile",
-                ),
-              ));
-            }
+            return MaterialPage(
+                child: BlocProvider(
+              create: (context) => UserBloc()..add(LoadUserEvent()),
+              child: const ProfileScreen(
+                title: "Profile",
+              ),
+            ));
+          }),
+      GoRoute(
+          name: 'users',
+          path: '/users',
+          pageBuilder: (context, state) {
+            return MaterialPage(
+                child: BlocProvider(
+                    create: (context) => UserBloc()..add(LoadAllUserEvent()),
+                    child: const AdminUserScreen()));
           }),
       GoRoute(
           name: 'dashboard',
@@ -195,24 +197,24 @@ class MyRouter {
                   create: (context) => ProductsBloc()..add(LoadProductsEvent()),
                 ),
               ],
-              child: loginState.user!.admin!.isOdd
+              child: int.parse(loginState.user?.admin.toString() ?? "0").isOdd
                   ? const AdminDashboardScreen()
                   : const NotFoundScreen(),
             ));
           })),
     ],
-    // redirect: (context, state) {
-    //   bool isAuthenticating = [
-    //     '/',
-    //   ].contains(state.matchedLocation);
+    redirect: (context, state) {
+      // bool isAuthenticating = [
+      //   '/',
+      // ].contains(state.matchedLocation);
 
-    //   final loggedIn = loginInfo.loggedIn;
+      final loggedIn = loginInfo.loggedIn;
 
-    //   if (loggedIn == true) {
-    //     return '/menu';
-    //   } else {
-    //     return '/';
-    //   }
-    // }
+      if (loggedIn == true) {
+        return '/menu';
+      } else {
+        return '/';
+      }
+    }
   );
 }

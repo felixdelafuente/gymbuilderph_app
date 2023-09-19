@@ -49,8 +49,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         List<CartModel> cartList = state.cart;
 
         // Create a set of product_ids from the cartList
-        Set<int?> productIdsInCart =
-            cartList.map((cart) => cart.productId).toSet();
+        Set<String?> productIdsInCart =
+            cartList.map((cart) => cart.productId.toString()).toSet();
 
         // Filter the productsList using the where method
         List<ProductsModel> filteredProducts = productsList.where((product) {
@@ -165,7 +165,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         //   } else {
                         //     widget.cartBloc.add(AddCartEvent(
                         //         userId: int.parse(
-                        //             loginState.user!.userId.toString()),
+                        //             loginState.user.userId.toString()),
                         //         productId: int.parse(
                         //             widget.product.productId.toString()),
                         //         quantity: quantity));

@@ -94,10 +94,10 @@ class _CartScreen extends State<CartScreen> {
             // Check if the current cart id is the lowest for the product id
             if (cartId == lowestCartId[productId]) {
               // Set the quantity to the total quantity
-              cart.quantity = totalQuantity[productId];
+              cart.quantity = totalQuantity[productId].toString();
             } else {
               // Set the quantity to zero
-              cart.quantity = 0;
+              cart.quantity = "0";
             }
           }
           print("quantityzzz: ${cartList.map((e) => e.quantity)}");
@@ -105,8 +105,8 @@ class _CartScreen extends State<CartScreen> {
           List<ProductsModel> productsList = productsState.products;
 
           // Create a set of product_ids from the cartList
-          Set<int?> productIdsInCart =
-              cartList.map((cart) => cart.productId).toSet();
+          Set<String?> productIdsInCart =
+              cartList.map((cart) => cart.productId.toString()).toSet();
 
           // Filter the productsList using the where method
           List<ProductsModel> filteredProducts = productsList.where((product) {
@@ -114,17 +114,16 @@ class _CartScreen extends State<CartScreen> {
             return productIdsInCart.contains(product.productId);
           }).toList();
 
-          print("filtered products: $filteredProducts");
+          print("filtered products: ${filteredProducts.map((e) => e.price)}");
 
           // Use the fold method to calculate the total price
           double totalPrice = filteredProducts.fold(
-            0.0, // Initial value
-            (sum, product) =>
-                sum +
-                (double.parse(product.price.toString()) *
-                    double.parse(product.item
-                        .toString())), // Function to apply to each element
-          );
+              0.0, // Initial value
+              (sum, product) => sum + double.parse(product.price.toString())
+              // (double.parse(product.price.toString()) *
+              //     double.parse(product.item
+              //         .toString())), // Function to apply to each element
+              );
 
           return Scaffold(
             appBar: AppBar(
@@ -256,7 +255,7 @@ class _CartScreen extends State<CartScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    context.goNamed("order");
+                    context.goNamed("checkout");
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.black87),
