@@ -19,7 +19,7 @@ class LoginBloc extends Bloc<LoginEvent, DataState> {
             await repository.loginResponse(event.email, event.password);
         emit(DataSuccess<UserModel>(data: response));
       } catch (e) {
-        debugPrint("login bloc data error ${e.toString()}");
+        //print("login bloc data error ${e.toString()}");
         emit(DataError(message: e.toString()));
       }
     });

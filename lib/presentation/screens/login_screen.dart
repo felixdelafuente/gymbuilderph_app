@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
         if (state is DataLoading) {
           print("loading");
         } else if (state is DataError) {
-          print("error");
+          print("state error: ${state.message.toString()}");
         } else if (state is DataSuccess) {
           context.goNamed("menu");
           Provider.of<LoginState>(context, listen: false).loggedIn = true;

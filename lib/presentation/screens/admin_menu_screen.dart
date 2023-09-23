@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gym_builder_app/presentation/widgets/admin_drawer.dart';
-import 'package:gym_builder_app/presentation/widgets/drawer.dart';
 
 class AdminMenuScreen extends StatefulWidget {
   const AdminMenuScreen({super.key, required this.title});
@@ -31,7 +30,8 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                 children: [
                   InkWell(
                     onTap: () {
-                      context.goNamed("dashboard");
+                      print("card tapped");
+                      context.goNamed("admin-dashboard");
                     },
                     child: const Card(
                         child: Column(
@@ -53,7 +53,8 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      context.goNamed("products");
+                      print("card tapped");
+                      context.goNamed("admin-products");
                     },
                     child: const Card(
                         child: Column(
@@ -75,7 +76,8 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      context.goNamed("order");
+                      print("card tapped");
+                      context.goNamed("admin-order");
                     },
                     child: const Card(
                         child: Column(
@@ -91,6 +93,32 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                         ),
                         Text(
                           "Orders",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    )),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      print("card tapped");
+                      context.goNamed("about");
+                    },
+                    child: const Card(
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.question_mark_rounded,
+                          size: 64,
+                          color: Colors.red,
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          "Information",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),

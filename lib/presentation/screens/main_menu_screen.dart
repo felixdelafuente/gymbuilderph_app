@@ -30,6 +30,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                 children: [
                   InkWell(
                     onTap: () {
+                      print("card tapped");
                       context.goNamed("products");
                     },
                     child: const Card(
@@ -52,6 +53,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   ),
                   InkWell(
                     onTap: () {
+                      print("card tapped");
                       context.goNamed("cart");
                     },
                     child: const Card(
@@ -77,6 +79,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   ),
                   InkWell(
                     onTap: () {
+                      print("card tapped");
                       context.goNamed("checkout");
                     },
                     child: const Card(
@@ -102,6 +105,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   ),
                   InkWell(
                     onTap: () {
+                      print("card tapped");
                       context.goNamed("user");
                     },
                     child: const Card(
@@ -127,6 +131,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   ),
                   InkWell(
                     onTap: () {
+                      print("card tapped");
                       context.goNamed("order");
                     },
                     child: const Card(
@@ -152,6 +157,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   ),
                   InkWell(
                     onTap: () {
+                      print("card tapped");
                       context.goNamed("about");
                     },
                     child: const Card(

@@ -49,7 +49,7 @@ Widget appDrawer(BuildContext context) {
           ),
           title: const Text('Profile'),
           onTap: () {
-            context.goNamed("profile");
+            context.goNamed("user");
             Navigator.pop(context);
           },
         ),
@@ -83,7 +83,7 @@ Widget appDrawer(BuildContext context) {
             final provider = Provider.of<LoginState>(context, listen: false);
             provider.loggedIn = false;
             provider.logout();
-            // Restart.restartApp();
+            Restart.restartApp();
             Navigator.pop(context);
           },
         ),

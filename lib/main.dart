@@ -15,7 +15,7 @@ Future<void> main() async {
   loginState = LoginState(await SharedPreferences.getInstance());
   // loginState.checkLoggedIn();
 
-  await Future.delayed(const Duration(milliseconds: 500));
+  // await Future.delayed(const Duration(milliseconds: 500));
 
   return runApp(MyApp(loginState: loginState));
 }
@@ -36,26 +36,41 @@ class MyApp extends StatelessWidget {
           lazy: false,
           create: (BuildContext createContext) => MyRouter(loginState),
         ),
+        BlocProvider(
+          create: (context) => CartBloc()..add(LoadCartEvent()),
+        ),
+        BlocProvider(
+          create: (context) => OrderBloc()..add(LoadOrderEvent()),
+        )
       ],
       child: Builder(builder: (context) {
         final router = Provider.of<MyRouter>(context, listen: false).goRouter;
-        return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => CartBloc()..add(LoadCartEvent()),
-              ),
-              BlocProvider(
-                create: (context) => OrderBloc()..add(LoadOrderEvent()),
-              )
-            ],
-            child: MaterialApp.router(
-              routeInformationProvider: router.routeInformationProvider,
-              routerDelegate: router.routerDelegate,
-              routeInformationParser: router.routeInformationParser,
-              title: 'Gym Builder PH',
-              theme: ThemeData(primaryColor: Colors.black),
-              builder: EasyLoading.init(),
-            ));
+        return MaterialApp.router(
+          routeInformationProvider: router.routeInformationProvider,
+          routerDelegate: router.routerDelegate,
+          routeInformationParser: router.routeInformationParser,
+          title: 'Gym Builder PH',
+          theme: ThemeData(primaryColor: Colors.black),
+          builder: EasyLoading.init(),
+        );
+
+        // return MultiBlocProvider(
+        //     providers: [
+        //       BlocProvider(
+        //         create: (context) => CartBloc()..add(LoadCartEvent()),
+        //       ),
+        //       BlocProvider(
+        //         create: (context) => OrderBloc()..add(LoadOrderEvent()),
+        //       )
+        //     ],
+        //     child: MaterialApp.router(
+        //       routeInformationProvider: router.routeInformationProvider,
+        //       routerDelegate: router.routerDelegate,
+        //       routeInformationParser: router.routeInformationParser,
+        //       title: 'Gym Builder PH',
+        //       theme: ThemeData(primaryColor: Colors.black),
+        //       builder: EasyLoading.init(),
+        //     ));
       }),
     );
   }

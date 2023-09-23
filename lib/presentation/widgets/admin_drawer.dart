@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gym_builder_app/bloc/login/login_state.dart';
-import 'package:gym_builder_app/main.dart';
 import 'package:provider/provider.dart';
 import 'package:restart_app/restart_app.dart';
 
@@ -20,7 +19,7 @@ Widget adminAppDrawer(BuildContext context) {
           ),
           title: const Text('Dashbaord'),
           onTap: () {
-            context.goNamed("dashboard");
+            context.goNamed("admin-dashboard");
             Navigator.pop(context);
           },
         ),
@@ -30,7 +29,7 @@ Widget adminAppDrawer(BuildContext context) {
           ),
           title: const Text('Products'),
           onTap: () {
-            context.goNamed("products");
+            context.goNamed("admin-products");
             Navigator.pop(context);
           },
         ),
@@ -40,7 +39,17 @@ Widget adminAppDrawer(BuildContext context) {
           ),
           title: const Text('Orders'),
           onTap: () {
-            context.goNamed("order");
+            context.goNamed("admin-order");
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(
+            Icons.info_outline_rounded,
+          ),
+          title: const Text('Information'),
+          onTap: () {
+            context.goNamed("information");
             Navigator.pop(context);
           },
         ),
@@ -50,7 +59,7 @@ Widget adminAppDrawer(BuildContext context) {
         //   ),
         //   title: const Text('Users'),
         //   onTap: () {
-        //     context.goNamed("users");
+        //     context.goNamed("admin-users");
         //     Navigator.pop(context);
         //   },
         // ),
@@ -64,7 +73,7 @@ Widget adminAppDrawer(BuildContext context) {
             final provider = Provider.of<LoginState>(context, listen: false);
             provider.loggedIn = false;
             provider.logout();
-            // Restart.restartApp();
+            Restart.restartApp();
             Navigator.pop(context);
           },
         ),

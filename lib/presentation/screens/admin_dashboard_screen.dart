@@ -20,8 +20,8 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
   late OrderBloc orderBloc;
   late ProductsBloc productsBloc;
   double totalSales = 0;
-  int mostPopularProductId = 0;
-  int mostPopularProductQuantity = 0;
+  String mostPopularProductId = "0";
+  String mostPopularProductQuantity = "0";
 
   @override
   void initState() {
@@ -96,12 +96,12 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               (productCount[order.productId] ?? 0) +
                   int.parse(order.quantity.toString());
         }
-        mostPopularProductId = productCount.keys.first;
-        mostPopularProductQuantity = productCount.values.first;
+        mostPopularProductId = productCount.keys.first.toString();
+        mostPopularProductQuantity = productCount.values.first.toString();
         for (int key in productCount.keys) {
-          if (productCount[key]! > mostPopularProductQuantity) {
-            mostPopularProductId = key;
-            mostPopularProductQuantity = productCount[key]!;
+          if (productCount[key]! > int.parse(mostPopularProductQuantity)) {
+            mostPopularProductId = key.toString();
+            mostPopularProductQuantity = productCount[key].toString();
           }
         }
 

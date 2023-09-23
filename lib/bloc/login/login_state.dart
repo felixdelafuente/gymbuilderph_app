@@ -42,41 +42,6 @@ class LoginState extends ChangeNotifier {
     prefs.remove('user');
   }
 
-  void rememberUser(Map<String, String> creds) {
-    final isRemembered = _credsToRemember
-        .where(
-          (element) =>
-              element['email'].toString().toLowerCase() ==
-              creds['email']?.toLowerCase(),
-        )
-        .isNotEmpty;
-    if (!isRemembered) {
-      _credsToRemember.add(creds);
-    }
-    prefs.setStringList(
-      'creds',
-      _credsToRemember
-          .map(
-            (e) => _encryptString(json.encode(e)),
-          )
-          .toList(),
-    );
-  }
-
-  void forgotUser(Map<String, String> creds) {
-    _credsToRemember.removeWhere(
-      (element) => element['email'] == creds['email'],
-    );
-    prefs.setStringList(
-      'creds',
-      _credsToRemember
-          .map(
-            (e) => _encryptString(json.encode(e)),
-          )
-          .toList(),
-    );
-  }
-
   void checkLoggedIn() {
     loggedIn = prefs.getBool(loggedInKey) ?? false;
     final String? userJson = prefs.getString('user');

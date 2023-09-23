@@ -56,25 +56,25 @@ class ApiProvider {
       print("before response working");
       Response response = await _dio.get('view_products.php');
       // print(response); // api response
-      debugPrint("response working");
-      debugPrint(response.data.runtimeType.toString());
+      print("response working");
+      print(response.data.runtimeType.toString());
       productsResult = response.data;
 
       // print(productsResult);
-      debugPrint("productsResult working");
+      print("productsResult working");
       return productsResult;
     } on DioException catch (e) {
-      debugPrint("productsRequest not working 1");
+      print("productsRequest not working 1");
       if (e.response != null) {
-        debugPrint("productsRequest not working 2");
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print("productsRequest not working 2");
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
-        debugPrint("productsRequest not working 3");
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print("productsRequest not working 3");
+        print('Error sending request!');
+        print(e.message);
       }
       rethrow;
     } catch (e) {
@@ -96,14 +96,14 @@ class ApiProvider {
       print("cartRequest not working 1");
       if (e.response != null) {
         print("cartRequest not working 2");
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
         print("cartRequest not working 3");
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print('Error sending request!');
+        print(e.message);
       }
       rethrow;
     } catch (e) {
@@ -128,14 +128,14 @@ class ApiProvider {
     } on DioException catch (e) {
       if (e.response != null) {
         cartAddRequest = e.response?.data['message'];
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
         cartAddRequest = "Something went wrong";
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print('Error sending request!');
+        print(e.message);
       }
     }
     return cartUpdateRequest;
@@ -159,14 +159,14 @@ class ApiProvider {
     } on DioException catch (e) {
       if (e.response != null) {
         cartUpdateRequest = e.response?.data['message'];
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
         cartUpdateRequest = "Something went wrong";
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print('Error sending request!');
+        print(e.message);
       }
     }
     return cartUpdateRequest!;
@@ -181,14 +181,14 @@ class ApiProvider {
     } on DioException catch (e) {
       if (e.response != null) {
         cartDeleteRequest = e.response?.data['message'];
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
         cartDeleteRequest = "Something went wrong";
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print('Error sending request!');
+        print(e.message);
       }
     }
     return cartDeleteRequest!;
@@ -209,14 +209,14 @@ class ApiProvider {
       print("addressResult not working 1");
       if (e.response != null) {
         print("addressResult not working 2");
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
         print("addressResult not working 3");
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print('Error sending request!');
+        print(e.message);
       }
       rethrow;
     } catch (e) {
@@ -249,14 +249,14 @@ class ApiProvider {
     } on DioException catch (e) {
       if (e.response != null) {
         addressAddRequest = e.response?.data['message'];
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
         addressAddRequest = "Something went wrong";
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print('Error sending request!');
+        print(e.message);
       }
     }
     return addressAddRequest;
@@ -289,14 +289,14 @@ class ApiProvider {
     } on DioException catch (e) {
       if (e.response != null) {
         addressUpdateRequest = e.response?.data['message'];
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
         addressUpdateRequest = "Something went wrong";
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print('Error sending request!');
+        print(e.message);
       }
     }
     return addressUpdateRequest;
@@ -314,14 +314,14 @@ class ApiProvider {
       print("orderResult not working 1");
       if (e.response != null) {
         print("orderResult not working 2");
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
         print("orderResult not working 3");
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print('Error sending request!');
+        print(e.message);
       }
       rethrow;
     } catch (e) {
@@ -342,14 +342,14 @@ class ApiProvider {
       print("orderResult not working 1");
       if (e.response != null) {
         print("orderResult not working 2");
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
         print("orderResult not working 3");
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print('Error sending request!');
+        print(e.message);
       }
       rethrow;
     } catch (e) {
@@ -397,14 +397,14 @@ class ApiProvider {
     } on DioException catch (e) {
       if (e.response != null) {
         orderAddRequest = e.response?.data['message'];
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
         orderAddRequest = "Something went wrong";
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print('Error sending request!');
+        print(e.message);
       }
     }
     return orderAddRequest;
@@ -420,14 +420,14 @@ class ApiProvider {
     } on DioException catch (e) {
       if (e.response != null) {
         orderDeleteRequest = e.response?.data['message'];
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
         orderDeleteRequest = "Something went wrong";
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print('Error sending request!');
+        print(e.message);
       }
     }
     return cartDeleteRequest;
@@ -445,14 +445,14 @@ class ApiProvider {
       print("userRequest not working 1");
       if (e.response != null) {
         print("userRequest not working 2");
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
         print("userRequest not working 3");
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print('Error sending request!');
+        print(e.message);
       }
       rethrow;
     } catch (e) {
@@ -472,14 +472,14 @@ class ApiProvider {
       print("userRequest not working 1");
       if (e.response != null) {
         print("userRequest not working 2");
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
         print("userRequest not working 3");
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print('Error sending request!');
+        print(e.message);
       }
       rethrow;
     } catch (e) {
@@ -506,14 +506,14 @@ class ApiProvider {
     } on DioException catch (e) {
       if (e.response != null) {
         userUpdateRequest = e.response?.data['message'];
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
         userUpdateRequest = "Something went wrong";
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print('Error sending request!');
+        print(e.message);
       }
     }
     return userUpdateRequest!;
@@ -528,14 +528,14 @@ class ApiProvider {
     } on DioException catch (e) {
       if (e.response != null) {
         userDeleteRequest = e.response?.data['message'];
-        debugPrint('Dio error!');
-        debugPrint('STATUS: ${e.response?.statusCode}');
-        debugPrint('DATA: ${e.response?.data['message']}');
-        debugPrint('HEADERS: ${e.response?.headers}');
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data['message']}');
+        print('HEADERS: ${e.response?.headers}');
       } else {
         userDeleteRequest = "Something went wrong";
-        debugPrint('Error sending request!');
-        debugPrint(e.message);
+        print('Error sending request!');
+        print(e.message);
       }
     }
     return cartDeleteRequest;
