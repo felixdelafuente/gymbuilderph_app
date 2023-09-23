@@ -17,7 +17,7 @@ Widget adminAppDrawer(BuildContext context) {
           leading: const Icon(
             Icons.dashboard_outlined,
           ),
-          title: const Text('Dashbaord'),
+          title: const Text('Dashboard'),
           onTap: () {
             context.goNamed("admin-dashboard");
             Navigator.pop(context);

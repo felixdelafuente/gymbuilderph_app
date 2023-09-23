@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gym_builder_app/presentation/widgets/drawer.dart';
 
 class InformationScreen extends StatefulWidget {
   const InformationScreen({super.key, required this.title});
@@ -28,6 +27,11 @@ class _InformationScreenState extends State<InformationScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 16.0),
+              Text(
+                'GYM Builder Equipments specializes in selling heavy-duty gym equipment to gym owners and fitness enthusiasts. Owned by Mr. Rufino A. Dela Cruz, the company has a Facebook page named Gym Builder. Visit Gym Builder Equipments on Facebook to explore their range of superior-quality equipment designed to meet the demands of rigorous workouts.',
+                style: TextStyle(fontSize: 18.0),
+              ),
               Text(
                 'How was Gym Builder PH developed?',
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),

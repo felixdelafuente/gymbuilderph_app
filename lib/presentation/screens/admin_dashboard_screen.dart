@@ -110,7 +110,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             leading: BackButton(
               onPressed: () => _.pushNamed("menu"),
             ),
-            title: const Text("Dashboard"),
+            title: const Text("Admin Dashboard"),
             centerTitle: true,
             backgroundColor: const Color(0xff2b2b2b),
           ),
