@@ -16,6 +16,7 @@ import 'package:gym_builder_app/presentation/screens/admin_user_screen.dart';
 import 'package:gym_builder_app/presentation/screens/information_screen.dart';
 import 'package:gym_builder_app/presentation/screens/cart_screen.dart';
 import 'package:gym_builder_app/presentation/screens/checkout_screen.dart';
+import 'package:gym_builder_app/presentation/screens/no_order_screen.dart';
 import 'package:gym_builder_app/presentation/screens/order_screen.dart';
 import 'package:gym_builder_app/presentation/screens/login_screen.dart';
 import 'package:gym_builder_app/presentation/screens/main_menu_screen.dart';
@@ -63,8 +64,8 @@ class MyRouter {
             }
           }),
       GoRoute(
-          name: 'menu',
-          path: '/menu',
+          name: 'main-menu',
+          path: '/main-menu',
           pageBuilder: (context, state) {
             return const MaterialPage(
                 child: MainMenuScreen(
@@ -180,6 +181,14 @@ class MyRouter {
               title: "About",
             ));
           })),
+      GoRoute(
+          name: 'no-order',
+          path: '/no-order',
+          pageBuilder: ((context, state) {
+            return const MaterialPage(
+                child: NoOrderScreen(
+            ));
+          })),
       // ADMIN ROUTES
       GoRoute(
           name: 'admin-menu',
@@ -228,7 +237,7 @@ class MyRouter {
                 create: (context) => ProductsBloc()..add(LoadProductsEvent()),
               ),
               BlocProvider(
-                create: (context) => OrderBloc()..add(LoadOrderEvent()),
+                create: (context) => OrderBloc()..add(LoadAllOrderEvent()),
               )
             ], child: const AdminOrderScreen()));
           })),

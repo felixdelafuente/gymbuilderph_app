@@ -120,11 +120,11 @@ class Repository {
   }
 
   // ORDER
-  Future<List<OrderItemModel>> getAllOrder() async {
+  Future<List<OrderModel>> getAllOrder() async {
     try {
       final List allOrderResult = await _provider.allOrderRequest();
 
-      return allOrderResult.map((e) => OrderItemModel.fromJson(e)).toList();
+      return allOrderResult.map((e) => OrderModel.fromJson(e)).toList();
     } catch (e) {
       throw Exception("Failed to load order, ${e.toString()}");
     }

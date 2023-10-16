@@ -325,6 +325,7 @@ class ApiProvider {
       }
       rethrow;
     } catch (e) {
+      print("api_provider error: $e");
       rethrow;
     }
   }

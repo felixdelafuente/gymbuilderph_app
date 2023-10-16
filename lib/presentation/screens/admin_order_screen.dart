@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gym_builder_app/bloc/order/order_bloc.dart';
+import 'package:gym_builder_app/data/models/order_item_model.dart';
 import 'package:gym_builder_app/data/models/order_model.dart';
 
 class AdminOrderScreen extends StatefulWidget {
@@ -75,7 +76,7 @@ class _AdminOrderScreenState extends State<AdminOrderScreen> {
         print("loading: $state");
       } else if (state is OrderErrorState) {
         print("error: $state");
-      } else if (state is OrderLoadedState) {
+      } else if (state is AllOrderLoadedState) {
         print("loaded: $state");
 
         List<OrderModel> orderList = state.order;
@@ -90,12 +91,16 @@ class _AdminOrderScreenState extends State<AdminOrderScreen> {
             backgroundColor: const Color(0xff2b2b2b),
           ),
           body: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: DataTable(
               columns: getDataColumns(),
               rows: getDataRows(orderList),
             ),
           ),
+          )
+          
         );
       } else {
         return Container();

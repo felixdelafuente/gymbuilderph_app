@@ -32,6 +32,7 @@ class _OrderScreen extends State<OrderScreen> {
       if (state is OrderLoadingState) {
         print("loading: $state");
       } else if (state is OrderErrorState) {
+        context.pushNamed("no-order");
         print("error: $state");
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -41,45 +42,25 @@ class _OrderScreen extends State<OrderScreen> {
                 Duration(seconds: 3), // How long the message will be displayed
           ),
         );
-        Future.delayed(const Duration(seconds: 1), () {
-          context.goNamed("menu");
-        });
-        // return Scaffold(
-        //   appBar: AppBar(
-        //     leading: BackButton(
-        //       onPressed: () => context.pushNamed("menu"),
-        //     ),
-        //     title: const Text("Your Order"),
-        //     centerTitle: true,
-        //     backgroundColor: const Color(0xff2b2b2b),
-        //   ),
-        //   body: const Center(
-        //     child: Text(
-        //         "You have no ongoing orders."), // The text to show in the center
-        //   ),
-        // );
+        context.goNamed("no-order");
       } else if (state is OrderLoadedState) {
         print("loaded: $state");
 
         List<OrderModel> orderList = state.order;
 
+        if (orderList.isEmpty) {
+          Future.delayed(const Duration(seconds: 3), () {
+            print("inside orderList.Empty 1");
+            context.goNamed("main-menu");
+            // context.push("/main-menu");
+          });
+        }
+
         return orderItems(context, orderList);
       } else {
-        return Scaffold(
-          appBar: AppBar(
-            leading: BackButton(
-              onPressed: () => context.pushNamed("menu"),
-            ),
-            title: const Text("Your Order"),
-            centerTitle: true,
-            backgroundColor: const Color(0xff2b2b2b),
-          ),
-          body: const Center(
-            child: Text(
-                "You have no ongoing orders."), // The text to show in the center
-          ),
-        );
+        context.goNamed("no-order");
       }
+      context.goNamed("no-order");
       return Scaffold(
         appBar: AppBar(
           leading: BackButton(
@@ -112,25 +93,17 @@ class _OrderScreen extends State<OrderScreen> {
                   seconds: 3), // How long the message will be displayed
             ),
           );
-          Future.delayed(const Duration(seconds: 1), () {
-            context.goNamed("menu");
-          });
-          // return Scaffold(
-          //   appBar: AppBar(
-          //     leading: BackButton(
-          //       onPressed: () => context.pushNamed("menu"),
-          //     ),
-          //     title: const Text("Your Order"),
-          //     centerTitle: true,
-          //     backgroundColor: const Color(0xff2b2b2b),
-          //   ),
-          //   body: const Center(
-          //     child: Text(
-          //         "You have no ongoing orders."), // The text to show in the center
-          //   ),
-          // );
+          context.goNamed("no-order");
         } else if (productsState is ProductsLoadedState) {
           // print("loaded: $productsState");
+
+          // if (orderList.isEmpty) {
+          //   Future.delayed(const Duration(seconds: 3), () {
+          //     print("inside orderList.Empty 2");
+          //     context.goNamed("main-menu");
+          //     // context.push("/main-menu");
+          //   });
+          // }
 
           // Create a map to store the lowest order id for each product id
           Map<String, int> lowestOrderId = {};
@@ -176,7 +149,6 @@ class _OrderScreen extends State<OrderScreen> {
               order.quantity = "0";
             }
           }
-          print("quantityzzz: ${orderList.map((e) => e.quantity)}");
 
           List<ProductsModel> productsList = productsState.products;
 
@@ -201,6 +173,23 @@ class _OrderScreen extends State<OrderScreen> {
                     double.parse(product.item
                         .toString())), // Function to apply to each element
           );
+
+          // if (orderList == []) {
+          //   context.goNamed("no-order");
+          // }
+
+          String firstItem = orderList.isNotEmpty
+              ? orderList.first.deliveryStatus.toString()
+              : "N/A";
+
+          String firstTotal = orderList.isNotEmpty
+              ? orderList.first.totalAmount.toString()
+              : "N/A";
+
+          if (firstItem == "cancelled") {
+            OrderBloc().add(DeleteOrderEvent(
+                orderId: int.parse(orderList.first.orderId.toString())));
+          }
 
           return Scaffold(
             appBar: AppBar(
@@ -262,7 +251,7 @@ class _OrderScreen extends State<OrderScreen> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
                   child: Text(
-                    "Order Status: ${orderList.first.deliveryStatus}",
+                    "Order Status: $firstItem",
                     style: const TextStyle(fontSize: 20),
                   ),
                 ),
@@ -273,7 +262,7 @@ class _OrderScreen extends State<OrderScreen> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
                   child: Text(
-                    "Total: ${orderList.first.totalAmount}",
+                    "Total: $firstTotal",
                     style: const TextStyle(fontSize: 20),
                   ),
                 ),
@@ -298,11 +287,9 @@ class _OrderScreen extends State<OrderScreen> {
                                   //     cartId: int.parse(
                                   //         cartList[index].cartId.toString())));
 
-                                  if (orderList.first.deliveryStatus
-                                          .toString() !=
-                                      "processing") {
-                                    Navigator.of(context)
-                                        .pop(); // Close the dialog
+                                  if (firstItem != "processing") {
+                                    // Navigator.of(context)
+                                    //     .pop(); // Close the dialog
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                         content: Text(
@@ -312,6 +299,11 @@ class _OrderScreen extends State<OrderScreen> {
                                                 3), // How long the message will be displayed
                                       ),
                                     );
+                                  } else if (firstItem == "cancelled") {
+                                    OrderBloc().add(DeleteOrderEvent(
+                                        orderId: int.parse(orderList
+                                            .first.orderId
+                                            .toString())));
                                   } else {
                                     OrderBloc().add(DeleteOrderEvent(
                                         orderId: int.parse(orderList
@@ -352,6 +344,7 @@ class _OrderScreen extends State<OrderScreen> {
                 )),
           );
         } else {
+          context.goNamed("no-order");
           return Scaffold(
             appBar: AppBar(
               leading: BackButton(
@@ -367,6 +360,7 @@ class _OrderScreen extends State<OrderScreen> {
             ),
           );
         }
+        context.goNamed("no-order");
         return Scaffold(
           appBar: AppBar(
             leading: BackButton(

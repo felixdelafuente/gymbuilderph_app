@@ -165,7 +165,7 @@ class _CheckoutScreen extends State<CheckoutScreen> {
           // }).toList();
 
           ////////////////////////////////////////////////////////////////////////////
-          
+
           // Create a set of product_ids from the cartList
           Set<String?> productIdsInCart =
               cartList.map((cart) => cart.productId.toString()).toSet();
@@ -192,18 +192,16 @@ class _CheckoutScreen extends State<CheckoutScreen> {
           // Print the filteredProducts list to see the result
           print(filteredProducts);
 
-
           print("filtered products: $filteredProducts");
 
           // Use the fold method to calculate the total price
           double totalPrice = filteredProducts.fold(
-            0.0, // Initial value
-            (sum, product) =>
-                sum + double.parse(product.price.toString())
-                // (double.parse(product.price.toString()) *
-                //     double.parse(product.item
-                //         .toString())), // Function to apply to each element
-          );
+              0.0, // Initial value
+              (sum, product) => sum + double.parse(product.price.toString())
+              // (double.parse(product.price.toString()) *
+              //     double.parse(product.item
+              //         .toString())), // Function to apply to each element
+              );
 
           return BlocBuilder<AddressBloc, AddressState>(
               builder: (addressContext, addressState) {
@@ -392,7 +390,8 @@ class _CheckoutScreen extends State<CheckoutScreen> {
                                               .user!.userId
                                               .toString()),
                                           addressLine1: addressLine1.text,
-                                          addressLine2: addressLine2.text,
+                                          addressLine2:
+                                              addressLine2.text ?? " ",
                                           city: city.text,
                                           country: country.text,
                                           postalCode: postalCode.text,
@@ -403,21 +402,20 @@ class _CheckoutScreen extends State<CheckoutScreen> {
                                               .user!.userId
                                               .toString()),
                                           addressLine1: addressLine1.text,
-                                          addressLine2: addressLine2.text,
+                                          addressLine2:
+                                              addressLine2.text ?? " ",
                                           city: city.text,
                                           country: country.text,
                                           postalCode: postalCode.text,
                                           phoneNumber: phoneNumber.text));
                                     }
-
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                           content: Text('Address saved.')),
                                     );
 
-                                    Future.delayed(const Duration(seconds: 1),
-                                        () {
-                                      //context.goNamed(colorProductsRouteName);
+                                    Future.delayed(
+                                        const Duration(milliseconds: 100), () {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (context) =>
@@ -469,30 +467,49 @@ class _CheckoutScreen extends State<CheckoutScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        OrderBloc().add(AddOrderEvent(
-                            userId:
-                                int.parse(loginState.user!.userId.toString()),
-                            addressId: int.parse(addressList.first.addressId.toString()),
-                            orderDate: DateTime.now().toString(),
-                            totalAmount: totalPrice,
-                            status: "0",
-                            deliveryStatus: "processing",
-                            orderItems: filteredProducts));
+                        if (addressList.first.addressId.toString() == "") {
+                          Fluttertoast.showToast(
+                            msg:
+                                'You must save your address once before placing your order.',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 2,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                        } else {
+                          for (CartModel cart in cartList) {
+                            CartBloc().add(DeleteCartEvent(
+                                cartId: int.parse(cart.cartId.toString())));
+                          }
+                          OrderBloc().add(AddOrderEvent(
+                              userId:
+                                  int.parse(loginState.user!.userId.toString()),
+                              addressId: int.parse(
+                                  addressList.first.addressId.toString()),
+                              orderDate: DateTime.now().toString(),
+                              totalAmount: totalPrice,
+                              status: "0",
+                              deliveryStatus: "processing",
+                              orderItems: filteredProducts));
 
-                        // Call the showToast method with the message and other parameters
-                        Fluttertoast.showToast(
-                          msg: 'Order has been placed. Check Orders page for more details',
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 2,
-                          backgroundColor: Colors.green,
-                          textColor: Colors.white,
-                          fontSize: 16.0,
-                        );
+                          // Call the showToast method with the message and other parameters
+                          Fluttertoast.showToast(
+                            msg:
+                                'Order has been placed. Check Orders page for more details',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 2,
+                            backgroundColor: Colors.green,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
 
-                        Future.delayed(const Duration(seconds: 3), () {
-                          context.goNamed("menu");
-                        });
+                          Future.delayed(const Duration(seconds: 3), () {
+                            context.goNamed("menu");
+                          });
+                        }
                       },
                       style: ButtonStyle(
                         backgroundColor:

@@ -13,6 +13,13 @@ class MainMenuScreen extends StatefulWidget {
 class _MainMenuScreenState extends State<MainMenuScreen> {
   @override
   Widget build(BuildContext context) {
+    // Future.delayed(const Duration(seconds: 3), () {
+    //   Navigator.of(context).pushReplacement(MaterialPageRoute(
+    //       builder: (context) => const MainMenuScreen(
+    //             title: "Gym Builder",
+    //           )));
+    // });
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -165,7 +172,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.question_mark_rounded,
+                          Icons.info_outline_rounded,
                           size: 64,
                           color: Colors.red,
                         ),
@@ -173,7 +180,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                           height: 8,
                         ),
                         Text(
-                          "Information",
+                          "About",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),

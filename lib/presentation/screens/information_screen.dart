@@ -17,7 +17,7 @@ class _InformationScreenState extends State<InformationScreen> {
         leading: BackButton(
           onPressed: () => context.pushNamed("menu"),
         ),
-        title: const Text("Your Order"),
+        title: const Text("About Us"),
         centerTitle: true,
         backgroundColor: const Color(0xff2b2b2b),
       ),
@@ -32,6 +32,7 @@ class _InformationScreenState extends State<InformationScreen> {
                 'GYM Builder Equipments specializes in selling heavy-duty gym equipment to gym owners and fitness enthusiasts. Owned by Mr. Rufino A. Dela Cruz, the company has a Facebook page named Gym Builder. Visit Gym Builder Equipments on Facebook to explore their range of superior-quality equipment designed to meet the demands of rigorous workouts.',
                 style: TextStyle(fontSize: 18.0),
               ),
+              SizedBox(height: 16.0),
               Text(
                 'How was Gym Builder PH developed?',
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),

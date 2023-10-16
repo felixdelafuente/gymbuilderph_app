@@ -110,7 +110,7 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.question_mark_rounded,
+                          Icons.info_outline_rounded,
                           size: 64,
                           color: Colors.red,
                         ),
@@ -118,7 +118,7 @@ class _AdminMenuScreenState extends State<AdminMenuScreen> {
                           height: 8,
                         ),
                         Text(
-                          "Information",
+                          "About",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),

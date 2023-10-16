@@ -55,17 +55,17 @@ Widget appDrawer(BuildContext context) {
         ),
         ListTile(
           leading: const Icon(
-            Icons.info_outline_rounded,
+            Icons.delivery_dining_outlined,
           ),
-          title: const Text('Information'),
+          title: const Text('Order'),
           onTap: () {
-            context.goNamed("information");
+            context.goNamed("order");
             Navigator.pop(context);
           },
         ),
         ListTile(
           leading: const Icon(
-            Icons.question_mark_outlined,
+            Icons.info_outline_rounded,
           ),
           title: const Text('About'),
           onTap: () {

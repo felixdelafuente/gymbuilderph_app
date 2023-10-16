@@ -47,9 +47,9 @@ Widget adminAppDrawer(BuildContext context) {
           leading: const Icon(
             Icons.info_outline_rounded,
           ),
-          title: const Text('Information'),
+          title: const Text('About'),
           onTap: () {
-            context.goNamed("information");
+            context.goNamed("about");
             Navigator.pop(context);
           },
         ),
